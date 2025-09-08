@@ -1,16 +1,44 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 import rateLimit from "express-rate-limit";
 import nodemailer from "nodemailer";
+import connectDB from "./backend/config/db.js";
 import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
+import {
+  domainConfig,
+  isAllowedOrigin,
+  getDomainConfig,
+} from "./domain-config.js";
 
 // Load environment variables
 dotenv.config();
+
+// Validate required environment variables
+const requiredEnvVars = [
+  "SMTP_USER",
+  "SMTP_PASS",
+  "ADMIN_EMAIL",
+  "MONGODB_URI",
+];
+const missingEnvVars = requiredEnvVars.filter(
+  (varName) => !process.env[varName]
+);
+
+if (missingEnvVars.length > 0) {
+  console.error(
+    "❌ Missing required environment variables:",
+    missingEnvVars.join(", ")
+  );
+  console.error(
+    "Please check your .env file and ensure all required variables are set."
+  );
+  process.exit(1);
+}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,39 +47,48 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Connect to MongoDB
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(
-      process.env.MONGODB_URI ||
-        "mongodb+srv://exim:exim24@cluster-namasteexim.kwpijax.mongodb.net/namasteexim?retryWrites=true&w=majority&appName=Cluster-namasteexim",
-      {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        maxPoolSize: 10,
-        serverSelectionTimeoutMS: 5000,
-        socketTimeoutMS: 45000,
-        bufferCommands: false,
-      }
-    );
-
-    console.log(`✅ MongoDB connected: ${conn.connection.host}`);
-    return conn;
-  } catch (error) {
-    console.error(`❌ MongoDB connection error: ${error.message}`);
-    process.exit(1);
-  }
-};
-
-// Connect to database
 connectDB();
 
 // Middleware
 app.use(
   helmet({
-    contentSecurityPolicy: false, // Disable CSP for development
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        imgSrc: ["'self'", "data:", "https:"],
+        scriptSrc: ["'self'"],
+        connectSrc: ["'self'"],
+      },
+    },
   })
 );
-app.use(cors());
+
+// Configure CORS with domain configuration
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      // Add environment variable origin if set
+      const allOrigins = [...domainConfig.allowedOrigins];
+      if (process.env.FRONTEND_URL) {
+        allOrigins.push(process.env.FRONTEND_URL);
+      }
+
+      if (isAllowedOrigin(origin) || allOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.warn(`🚫 CORS blocked origin: ${origin}`);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(morgan("combined"));
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
@@ -60,6 +97,9 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
+  message: {
+    error: "Too many requests from this IP, please try again later.",
+  },
 });
 app.use("/api", limiter);
 
@@ -100,8 +140,8 @@ const transporter = nodemailer.createTransport({
   port: process.env.SMTP_PORT || 587,
   secure: false,
   auth: {
-    user: process.env.SMTP_USER || "adityadevops6@gmail.com",
-    pass: process.env.SMTP_PASS || "buqx lanq jljk kpvk",
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASS,
   },
 });
 
@@ -120,7 +160,7 @@ const getClientIP = (req) => {
 const sendEmail = async (to, subject, html) => {
   try {
     const mailOptions = {
-      from: process.env.SMTP_USER || "adityadevops6@gmail.com",
+      from: process.env.SMTP_USER,
       to,
       subject,
       html,
@@ -135,12 +175,57 @@ const sendEmail = async (to, subject, html) => {
   }
 };
 
+// Input validation helper
+const validateInput = (data, requiredFields) => {
+  const errors = [];
+
+  requiredFields.forEach((field) => {
+    if (!data[field] || data[field].trim() === "") {
+      errors.push(`${field} is required`);
+    }
+  });
+
+  // Email validation
+  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+    errors.push("Invalid email format");
+  }
+
+  return errors;
+};
+
+// Serve static files from the React app build directory
+app.use(express.static(path.join(__dirname, "dist")));
+
 // API Routes
+app.get("/api/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV || "development",
+    version: "1.0.0",
+    database: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
+  });
+});
 
 // Contact Form Endpoint
 app.post("/api/contact", async (req, res) => {
   try {
     const { name, email, phone, company, subject, message } = req.body;
+
+    // Validate required fields
+    const validationErrors = validateInput(req.body, [
+      "name",
+      "email",
+      "subject",
+      "message",
+    ]);
+    if (validationErrors.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Validation failed",
+        errors: validationErrors,
+      });
+    }
 
     // Get client details
     const ipAddress = getClientIP(req);
@@ -161,55 +246,31 @@ app.post("/api/contact", async (req, res) => {
     await contact.save();
     console.log("✅ Contact form saved to database");
 
-    // Send email to Namaste EXIM
-    const adminEmailHtml = `
-      <h2>New Contact Form Submission</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-      <p><strong>Company:</strong> ${company || "Not provided"}</p>
-      <p><strong>Subject:</strong> ${subject}</p>
-      <p><strong>Message:</strong> ${message}</p>
-      <p><strong>IP Address:</strong> ${ipAddress}</p>
-      <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
-    `;
-
+    // Send email to admin
     const adminEmailSent = await sendEmail(
-      process.env.ADMIN_EMAIL || "adityadevops6@gmail.com",
+      process.env.ADMIN_EMAIL,
       `New Contact Form: ${subject}`,
-      adminEmailHtml
+      `New contact form submission from ${name} (${email}). Message: ${message}`
     );
 
     // Send confirmation email to user
-    const userEmailHtml = `
-      <h2>Thank you for contacting Namaste EXIM!</h2>
-      <p>Dear ${name},</p>
-      <p>We have received your message and our team will get back to you within 24 hours.</p>
-      <p><strong>Your message:</strong> ${message}</p>
-      <p>Best regards,<br>Namaste EXIM Team</p>
-    `;
-
     const userEmailSent = await sendEmail(
       email,
       "Thank you for contacting Namaste EXIM",
-      userEmailHtml
+      `Dear ${name}, thank you for contacting us. We will get back to you within 24 hours.`
     );
 
     // Check if emails were sent successfully
     if (!adminEmailSent || !userEmailSent) {
-      console.warn(
-        "⚠️ Some emails failed to send, but form was saved to database"
-      );
+      console.warn("⚠️ Some emails failed to send, but contact form was saved to database");
       res.status(200).json({
         success: true,
-        message:
-          "Contact form submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
+        message: "Contact form submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
       });
     } else {
       res.status(200).json({
         success: true,
-        message:
-          "Contact form submitted successfully. We will get back to you within 24 hours.",
+        message: "Contact form submitted successfully. We will get back to you within 24 hours.",
       });
     }
   } catch (error) {
@@ -224,8 +285,22 @@ app.post("/api/contact", async (req, res) => {
 // Quote Request Endpoint
 app.post("/api/quote", async (req, res) => {
   try {
-    const { name, email, phone, company, product, quantity, requirements } =
-      req.body;
+    const { name, email, phone, company, product, quantity, requirements } = req.body;
+
+    // Validate required fields
+    const validationErrors = validateInput(req.body, [
+      "name",
+      "email",
+      "product",
+      "quantity",
+    ]);
+    if (validationErrors.length > 0) {
+      return res.status(400).json({
+        success: false,
+        message: "Validation failed",
+        errors: validationErrors,
+      });
+    }
 
     // Get client details
     const ipAddress = getClientIP(req);
@@ -247,57 +322,31 @@ app.post("/api/quote", async (req, res) => {
     await quote.save();
     console.log("✅ Quote request saved to database");
 
-    // Send email to Namaste EXIM
-    const adminEmailHtml = `
-      <h2>New Quote Request</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone || "Not provided"}</p>
-      <p><strong>Company:</strong> ${company || "Not provided"}</p>
-      <p><strong>Product:</strong> ${product}</p>
-      <p><strong>Quantity:</strong> ${quantity}</p>
-      <p><strong>Requirements:</strong> ${requirements || "Not specified"}</p>
-      <p><strong>IP Address:</strong> ${ipAddress}</p>
-      <p><strong>Timestamp:</strong> ${new Date().toLocaleString()}</p>
-    `;
-
+    // Send email to admin
     const adminEmailSent = await sendEmail(
-      process.env.ADMIN_EMAIL || "adityadevops6@gmail.com",
+      process.env.ADMIN_EMAIL,
       `New Quote Request: ${product}`,
-      adminEmailHtml
+      `New quote request from ${name} (${email}) for ${product}. Quantity: ${quantity}. Requirements: ${requirements || 'None specified'}`
     );
 
     // Send confirmation email to user
-    const userEmailHtml = `
-      <h2>Thank you for your quote request!</h2>
-      <p>Dear ${name},</p>
-      <p>We have received your quote request for <strong>${product}</strong> and our team will get back to you within 24 hours with a detailed quote.</p>
-      <p><strong>Product:</strong> ${product}</p>
-      <p><strong>Quantity:</strong> ${quantity}</p>
-      <p>Best regards,<br>Namaste EXIM Team</p>
-    `;
-
     const userEmailSent = await sendEmail(
       email,
       "Quote Request Received - Namaste EXIM",
-      userEmailHtml
+      `Dear ${name}, thank you for your quote request for ${product}. We will prepare a detailed quote for you within 24 hours.`
     );
 
     // Check if emails were sent successfully
     if (!adminEmailSent || !userEmailSent) {
-      console.warn(
-        "⚠️ Some emails failed to send, but quote request was saved to database"
-      );
+      console.warn("⚠️ Some emails failed to send, but quote request was saved to database");
       res.status(200).json({
         success: true,
-        message:
-          "Quote request submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
+        message: "Quote request submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
       });
     } else {
       res.status(200).json({
         success: true,
-        message:
-          "Quote request submitted successfully. We will get back to you within 24 hours.",
+        message: "Quote request submitted successfully. We will get back to you within 24 hours.",
       });
     }
   } catch (error) {
@@ -309,32 +358,59 @@ app.post("/api/quote", async (req, res) => {
   }
 });
 
-// Health check endpoint
-app.get("/api/health", (req, res) => {
-  res.status(200).json({
-    status: "OK",
-    timestamp: new Date().toISOString(),
-    database:
-      mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
+// Catch all handler: send back React's index.html file for any non-API routes
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error("❌ Server error:", err);
+  res.status(500).json({
+    success: false,
+    message: "Internal server error",
   });
 });
 
-// Serve static files from the dist directory
-app.use(express.static(path.join(__dirname, "dist")));
+// Add domain middleware
+app.use((req, res, next) => {
+  const host = req.get("host");
+  const domainInfo = getDomainConfig(host);
 
-// Handle React routing, return all requests to React app
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "dist", "index.html"));
+  console.log(`🌐 Request from: ${host} (${domainInfo.type})`);
+
+  // Set domain-specific headers
+  res.setHeader("X-Domain", host);
+  res.setHeader("X-Domain-Type", domainInfo.type);
+  res.setHeader("X-Primary-Domain", domainConfig.primary);
+  res.setHeader("X-Fallback-Domain", domainConfig.fallback);
+
+  // Add domain info to request object
+  req.domainInfo = domainInfo;
+
+  next();
 });
 
 // Start server
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || "development"}`);
+  console.log(`📁 Serving static files from: ${path.join(__dirname, "dist")}`);
+  console.log(`🌐 Primary domain: ${domainConfig.primary}`);
+  console.log(`🔄 Fallback domain: ${domainConfig.fallback}`);
+  console.log(`🔗 Allowed domains: ${domainConfig.allowedOrigins.join(", ")}`);
   console.log(
-    `📧 Email configured for: ${
-      process.env.SMTP_USER || "adityadevops6@gmail.com"
-    }`
+    `📧 Email domains: ${Object.keys(domainConfig.email).join(", ")}`
   );
-  console.log(`🗄️  Database: namasteexim`);
-  console.log(`🌐 Frontend served from: ${path.join(__dirname, "dist")}`);
+});
+
+// Graceful shutdown
+process.on("SIGTERM", () => {
+  console.log("🛑 SIGTERM received, shutting down gracefully");
+  process.exit(0);
+});
+
+process.on("SIGINT", () => {
+  console.log("🛑 SIGINT received, shutting down gracefully");
+  process.exit(0);
 });
