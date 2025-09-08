@@ -9,6 +9,7 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
+import GlobalNetworkImage from "../assets/images/global-network-connectivity-stockcake.jpg";
 
 const GlobalMarketsPage: React.FC = () => {
   const middleEastMarkets = [
@@ -335,8 +336,7 @@ const GlobalMarketsPage: React.FC = () => {
                 <div
                   className="w-full h-full bg-cover bg-center rounded-2xl opacity-80"
                   style={{
-                    backgroundImage:
-                      'url("/src/assets/images/global-network-connectivity-stockcake.jpg")',
+                    backgroundImage: `url(${GlobalNetworkImage})`,
                   }}
                 ></div>
               </div>

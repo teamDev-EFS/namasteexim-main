@@ -8,6 +8,7 @@ import {
   Users,
   TrendingUp,
 } from "lucide-react";
+import ExportImportImage from "../../assets/images/Export-Import.jpg";
 
 const HeroSection: React.FC = () => {
   const [currentText, setCurrentText] = useState(0);
@@ -46,7 +47,7 @@ const HeroSection: React.FC = () => {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: 'url("/src/assets/images/Export-Import.jpg")',
+          backgroundImage: `url(${ExportImportImage})`,
         }}
       >
         <div className="absolute inset-0 bg-black/50"></div>
