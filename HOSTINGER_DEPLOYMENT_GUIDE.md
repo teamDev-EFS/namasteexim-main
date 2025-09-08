@@ -64,19 +64,19 @@ MONGODB_URI=mongodb+srv://exim:exim24@cluster-namasteexim.kwpijax.mongodb.net/na
 # Email Configuration (SMTP) - Gmail
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
-SMTP_USER=adityadevops6@gmail.com
-SMTP_PASS=buqx lanq jljk kpvk
+SMTP_USER=namasteeximventures@gmail.com
+SMTP_PASS=zqpu zoes ccmd wfnp
 
 # Admin Email (where contact forms will be sent)
-ADMIN_EMAIL=adityadevops6@gmail.com
+ADMIN_EMAIL=namasteeximventures@gmail.com
 
 # Frontend Email (for notifications)
-FRONTEND_EMAIL=adityadevops6@gmail.com
+FRONTEND_EMAIL=namasteeximventures@gmail.com
 
 # Domain Configuration
-PRIMARY_DOMAIN=www.namasteexim.com
+PRIMARY_DOMAIN=www.namasteeximventures.com
 FALLBACK_DOMAIN=namasteeximventures.com
-FRONTEND_URL=https://www.namasteexim.com
+FRONTEND_URL=https://www.namasteeximventures.com
 ```
 
 ### **Step 4: Install Dependencies**
@@ -119,9 +119,10 @@ cd ..
    - Check logs for any errors
 
 2. **Test your application:**
-   - Visit your domain
-   - Test contact form
-   - Test quote request form
+   - Visit: `https://www.namasteeximventures.com`
+   - Test contact form: `https://www.namasteeximventures.com/api/contact`
+   - Test quote request form: `https://www.namasteeximventures.com/api/quote`
+   - Health check: `https://www.namasteeximventures.com/api/health`
 
 ---
 
@@ -181,7 +182,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://www.namasteexim.com", // Primary domain
+        target: "https://www.namasteeximventures.com", // Primary domain
         changeOrigin: true,
       },
     },
@@ -218,19 +219,19 @@ Your backend is already production-ready with:
 
 Your application supports multiple domains with fallback:
 
-1. **Primary Domain:** `www.namasteexim.com`
+1. **Primary Domain:** `www.namasteeximventures.com`
 2. **Fallback Domain:** `namasteeximventures.com`
-3. **Alias Domains:** `namasteexim.com`, `www.namasteeximventures.com`
+3. **Alias Domains:** `namasteexim.com`, `www.namasteexim.com`
 
 **Domain Setup in Hostinger:**
 
 1. **Add Domains:**
 
    - Go to **Domains** → **Add Domain**
-   - Add `www.namasteexim.com` (primary)
+   - Add `www.namasteeximventures.com` (primary)
    - Add `namasteeximventures.com` (fallback)
    - Add `namasteexim.com` (alias)
-   - Add `www.namasteeximventures.com` (alias)
+   - Add `www.namasteexim.com` (alias)
 
 2. **DNS Configuration:**
 
@@ -245,8 +246,8 @@ Your application supports multiple domains with fallback:
    - Ensure HTTPS redirect is enabled
 
 4. **Redirects (Optional):**
-   - Set up redirects: `namasteexim.com` → `www.namasteexim.com`
-   - Set up redirects: `www.namasteeximventures.com` → `namasteeximventures.com`
+   - Set up redirects: `namasteexim.com` → `www.namasteeximventures.com`
+   - Set up redirects: `www.namasteexim.com` → `www.namasteeximventures.com`
 
 **CORS Configuration:**
 
@@ -324,7 +325,7 @@ pause
 
 ### **2. Backend Tests**
 
-- [ ] Health check endpoint: `https://www.namasteexim.com/api/health`
+- [ ] Health check endpoint: `https://www.namasteeximventures.com/api/health`
 - [ ] Health check endpoint: `https://namasteeximventures.com/api/health`
 - [ ] Contact form submission works
 - [ ] Quote request form works

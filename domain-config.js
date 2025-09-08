@@ -1,22 +1,22 @@
-// Domain Configuration for Namaste EXIM
+// Domain Configuration for Namaste EXIM Ventures
 // This file contains all domain-related settings
 
 export const domainConfig = {
   // Primary domain (main website)
-  primary: "www.namasteexim.com",
+  primary: "www.namasteeximventures.com",
 
   // Fallback domain (backup website)
   fallback: "namasteeximventures.com",
 
   // All alias domains
-  aliases: ["namasteexim.com", "www.namasteeximventures.com"],
+  aliases: ["namasteexim.com", "www.namasteexim.com"],
 
   // All allowed origins for CORS
   allowedOrigins: [
-    "https://www.namasteexim.com",
-    "https://namasteexim.com",
     "https://www.namasteeximventures.com",
     "https://namasteeximventures.com",
+    "https://www.namasteexim.com",
+    "https://namasteexim.com",
   ],
 
   // SSL configuration
@@ -27,13 +27,21 @@ export const domainConfig = {
 
   // Email configuration per domain
   email: {
-    "www.namasteexim.com": {
-      from: "noreply@namasteexim.com",
-      admin: "admin@namasteexim.com",
+    "www.namasteeximventures.com": {
+      from: "namasteeximventures@gmail.com",
+      admin: "namasteeximventures@gmail.com",
     },
     "namasteeximventures.com": {
-      from: "noreply@namasteeximventures.com",
-      admin: "admin@namasteeximventures.com",
+      from: "namasteeximventures@gmail.com",
+      admin: "namasteeximventures@gmail.com",
+    },
+    "www.namasteexim.com": {
+      from: "noreply@namasteexim.com",
+      admin: "namasteeximventures@gmail.com",
+    },
+    "namasteexim.com": {
+      from: "noreply@namasteexim.com",
+      admin: "namasteeximventures@gmail.com",
     },
   },
 };

@@ -81,13 +81,7 @@ VITE_GOOGLE_MAPS_API_KEY=AIzaSyDmzcwUN7T2d9VDQNQfG1QOWHDl0JFtY-U
 #### Backend (.env in backend folder)
 
 ```bash
-MONGODB_URI=mongodb+srv://licensing_db_user:mAMn03K28UnJa3CY@cluster-namasteexim.kwpijax.mongodb.net/?retryWrites=true&w=majority&appName=Cluster-namasteexim
-MONGODB_DB_NAME=namasteexim
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=namasteexim@gmail.com
-SMTP_PASS=your_app_password_here
-FRONTEND_EMAIL=namasteexim@gmail.com
+
 PORT=5000
 ```
 
@@ -202,8 +196,9 @@ npm run build
 
 For technical support or questions:
 
-- Email: namasteexim@gmail.com
+- Email: namasteeximventures@gmail.com
 - Backend Health: http://localhost:5000/api/health
+- Production URL: https://www.namasteeximventures.com
 
 ## 🔒 Security Features
 
