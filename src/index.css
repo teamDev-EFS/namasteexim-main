@@ -1,0 +1,482 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS utilities */
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.line-clamp-3 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Product card hover effects */
+.product-card {
+  transition: all 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* MegaMenu animations */
+.mega-menu-enter {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.mega-menu-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 200ms, transform 200ms;
+}
+
+.mega-menu-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mega-menu-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 200ms, transform 200ms;
+}
+
+/* MegaMenu responsive fixes */
+@media (max-width: 1024px) {
+  .mega-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    overflow-y: auto;
+  }
+}
+
+/* Ensure proper dropdown positioning */
+.mega-menu-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Smooth scrollbar for MegaMenu */
+.mega-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mega-menu::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.mega-menu::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.mega-menu::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Product category cards hover effects */
+.category-card {
+  transition: all 0.3s ease;
+}
+
+.category-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Quick actions section */
+.quick-actions-section {
+  position: sticky;
+  top: 0;
+  height: fit-content;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+  }
+
+  .font-serif {
+    font-family: "Playfair Display", serif;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
+    line-height: 1.2;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gradient-to-r from-amber-500 to-amber-600 text-white px-8 py-3 rounded-full font-semibold hover:from-amber-600 hover:to-amber-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 rounded-full font-semibold transition-all duration-300;
+  }
+
+  .card {
+    @apply bg-white/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 hover:shadow-3xl transition-all duration-300;
+  }
+
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl;
+  }
+}
+
+@layer utilities {
+  .pulse {
+    animation: pulse-dot 2s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.5);
+      opacity: 0.7;
+    }
+  }
+
+  .animate-in {
+    animation: animateIn 0.6s ease-out forwards;
+  }
+
+  .slide-in-from-top-2 {
+    animation: slideInFromTop 0.3s ease-out forwards;
+  }
+
+  .slide-in-from-bottom-2 {
+    animation: slideInFromBottom 0.3s ease-out forwards;
+  }
+
+  .fade-in {
+    animation: fadeIn 0.6s ease-out forwards;
+  }
+
+  @keyframes animateIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromTop {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animation-delay-1000 {
+    animation-delay: 1s;
+  }
+
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+
+  .border-3 {
+    border-width: 3px;
+  }
+
+  .shadow-3xl {
+    box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  .backdrop-blur-xl {
+    backdrop-filter: blur(24px);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #f59e0b, #d97706, #b45309);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  }
+
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Fix for navigation animations */
+  .animate-in {
+    animation: animateIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .slide-in-from-top-2 {
+    animation: slideInFromTop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Improved z-index utilities */
+  .z-navbar {
+    z-index: 100;
+  }
+
+  .z-megamenu {
+    z-index: 90;
+  }
+
+  .z-dropdown {
+    z-index: 80;
+  }
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color,
+    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 200ms;
+}
+
+/* Selection styling */
+::selection {
+  background-color: #f59e0b;
+  color: white;
+}
+
+::-moz-selection {
+  background-color: #f59e0b;
+  color: white;
+}
+
+/* Focus styles */
+.focus-visible:focus {
+  outline: 2px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+/* Loading animations */
+.loading-dots {
+  display: inline-block;
+}
+
+.loading-dots::after {
+  content: "";
+  animation: loading-dots 1.5s infinite;
+}
+
+@keyframes loading-dots {
+  0%,
+  20% {
+    content: "";
+  }
+  40% {
+    content: ".";
+  }
+  60% {
+    content: "..";
+  }
+  80%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Navigation animation fixes */
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* MegaMenu specific styles */
+.mega-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border: 1px solid #e5e7eb;
+  border-radius: 0 0 16px 16px;
+  z-index: 50;
+  overflow: hidden;
+  min-width: 90vw;
+  max-width: 1400px;
+}
+
+/* Ensure MegaMenu appears above other content */
+.mega-menu-container {
+  position: relative;
+  z-index: 60;
+}
+
+/* MegaMenu animation */
+.mega-menu.animate-fade-in {
+  animation: megaMenuSlideIn 0.3s ease-out;
+}
+
+@keyframes megaMenuSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Responsive MegaMenu */
+@media (max-width: 1280px) {
+  .mega-menu {
+    min-width: 95vw;
+    max-width: 95vw;
+  }
+}
+
+@media (max-width: 1024px) {
+  .mega-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    overflow-y: auto;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    transform: none;
+    border-radius: 0;
+  }
+}
