@@ -10,6 +10,7 @@ import {
   Star,
 } from "lucide-react";
 import GlobalNetworkImage from "../assets/images/global-network-connectivity-stockcake.jpg";
+import MiddleEastMapImage from "../assets/images/Middle-East-Map.jpg";
 
 const GlobalMarketsPage: React.FC = () => {
   const middleEastMarkets = [
@@ -20,7 +21,7 @@ const GlobalMarketsPage: React.FC = () => {
       description: "Strategic hub for premium agricultural exports",
       growth: "35%",
       color: "from-amber-500 to-amber-600",
-      image: "/src/assets/images/Middle-East-Map.jpg",
+      image: MiddleEastMapImage,
       coordinates: [25.2048, 55.2708], // Dubai
       markerColor: "#f59e0b",
       type: "Premium Market",
@@ -146,11 +147,25 @@ const GlobalMarketsPage: React.FC = () => {
                 key={index}
                 className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden bg-gradient-to-br from-amber-500 to-amber-600">
                   <img
                     src={region.image}
                     alt={region.name}
                     className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                      console.error(
+                        `Failed to load image for ${region.name}:`,
+                        region.image
+                      );
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = "none";
+                    }}
+                    onLoad={() => {
+                      console.log(
+                        `Successfully loaded image for ${region.name}:`,
+                        region.image
+                      );
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                   <div className="absolute bottom-4 left-4 right-4">

@@ -10,6 +10,9 @@ import {
   ArrowRight,
   Star,
 } from "lucide-react";
+import GlobalFoodsImage from "../assets/images/globalfoods.jpg";
+import MiddleEastMapImage from "../assets/images/Middle-East-Map.jpg";
+import AsiaPacificImage from "../assets/images/asia-pacific.png";
 import { motion } from "framer-motion";
 
 const PartnershipsPage: React.FC = () => {
@@ -88,16 +91,14 @@ const PartnershipsPage: React.FC = () => {
       partnership: "Distributor Partnership",
       story:
         "Increased market share by 40% in 2 years through our premium rice portfolio",
-      image:
-        "/src/assets/images/globalfoods.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+      image: GlobalFoodsImage,
     },
     {
       company: "Middle East Trading Co.",
       country: "UAE",
       partnership: "Joint Venture",
       story: "Successfully launched 15 new products in the GCC market",
-      image:
-        "/src/assets/images/Middle-East-Map.jpg?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+      image: MiddleEastMapImage,
     },
     {
       company: "Asia Pacific Imports",
@@ -105,8 +106,7 @@ const PartnershipsPage: React.FC = () => {
       partnership: "Supply Chain Partnership",
       story:
         "Reduced operational costs by 25% while improving quality standards",
-      image:
-        "/src/assets/images/asia-pacific.png?auto=compress&cs=tinysrgb&w=400&h=400&fit=crop",
+      image: AsiaPacificImage,
     },
   ];
 
