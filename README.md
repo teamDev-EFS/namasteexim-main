@@ -74,9 +74,7 @@ cd ..
 
 #### Frontend (.env)
 
-```bash
-VITE_GOOGLE_MAPS_API_KEY=AIzaSyDmzcwUN7T2d9VDQNQfG1QOWHDl0JFtY-U
-```
+
 
 #### Backend (.env in backend folder)
 
