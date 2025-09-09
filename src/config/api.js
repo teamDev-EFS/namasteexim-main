@@ -3,9 +3,14 @@
 
 // Get API base URL from environment variables
 const getApiBaseUrl = () => {
-  // Vite automatically loads environment variables prefixed with VITE_
-  const apiUrl = import.meta.env.VITE_API_URL;
+  // In production (Netlify), use relative paths for API calls
+  // Netlify will proxy /api/* requests to the Render backend
+  if (import.meta.env.PROD) {
+    return ""; // Use relative paths in production
+  }
 
+  // In development, use the VITE_API_URL or fallback to localhost
+  const apiUrl = import.meta.env.VITE_API_URL;
   if (!apiUrl) {
     console.warn("VITE_API_URL not found in environment variables");
     // Fallback to localhost for development
