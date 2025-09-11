@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import {
   ArrowLeft,
   Star,
@@ -15,15 +15,13 @@ import QuoteRequestModal from "../components/UI/QuoteRequestModal";
 
 const ProductDetailPage: React.FC = () => {
   const { productId } = useParams<{ productId: string }>();
-  const navigate = useNavigate();
   const [selectedVariant, setSelectedVariant] = useState<string>("");
-  const [quantity, setQuantity] = useState("1");
   const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
 
   const product = getProductById(productId || "");
   const category = product
-    ? productCategories.find(
-        (cat) => cat.id === product.category.toLowerCase().replace(/\s+/g, "-")
+    ? productCategories.find((cat) =>
+        cat.products.some((p) => p.id === product.id)
       )
     : null;
 
@@ -81,9 +79,7 @@ const ProductDetailPage: React.FC = () => {
             </Link>
             <span>/</span>
             <Link
-              to={`/products/${product.category
-                .toLowerCase()
-                .replace(/\s+/g, "-")}`}
+              to={`/products/${category?.id || "all"}`}
               className="hover:text-emerald-600 transition-colors"
             >
               {product.category}

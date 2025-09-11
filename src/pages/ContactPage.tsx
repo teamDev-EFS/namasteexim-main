@@ -45,8 +45,8 @@ const ContactPage: React.FC = () => {
       type: "office" as const,
       details: {
         address: "Export Plaza, Mumbai, Maharashtra 400001, India",
-        phone: "+91 98765 43210",
-        email: "info@namasteexim.com",
+        phone: "+91-7806070556",
+        email: "info@namasteeximventures.com",
         products: ["Rice", "Jaggery", "Spices", "Nuts"],
         volume: "50,000+ MT annually",
       },
@@ -59,8 +59,8 @@ const ContactPage: React.FC = () => {
       type: "warehouse" as const,
       details: {
         address: "Mumbai Port Area, Maharashtra, India",
-        phone: "+91 98765 43211",
-        email: "warehouse@namasteexim.com",
+        phone: "+91-7806070556",
+        email: "namasteeximventures@gmail.com",
         products: ["Bulk Storage", "Quality Control", "Packaging"],
         volume: "25,000 MT capacity",
       },
@@ -538,11 +538,15 @@ const ContactPage: React.FC = () => {
                 <div className="text-gray-600 space-y-2">
                   <p className="flex items-center justify-center space-x-2">
                     <Phone className="w-4 h-4 text-emerald-600" />
-                    <span>+91 98765 43210</span>
+                    <span>+91-7806070556</span>
                   </p>
                   <p className="flex items-center justify-center space-x-2">
                     <Mail className="w-4 h-4 text-emerald-600" />
-                    <span>info@namasteexim.com</span>
+                    <span>info@namasteeximventures.com</span>
+                  </p>
+                  <p className="flex items-center justify-center space-x-2">
+                    <Mail className="w-4 h-4 text-emerald-600" />
+                    <span>namasteeximventures@gmail.com</span>
                   </p>
                 </div>
               </div>

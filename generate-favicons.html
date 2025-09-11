@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Favicon Generator</title>
+  </head>
+  <body>
+    <h1>Namaste EXIM Favicon Generator</h1>
+    <p>
+      Use this page to generate favicon files. Right-click and save each canvas
+      as the corresponding file.
+    </p>
+
+    <h2>32x32 PNG</h2>
+    <canvas
+      id="favicon32"
+      width="32"
+      height="32"
+      style="border: 1px solid #ccc"
+    ></canvas>
+
+    <h2>16x16 PNG</h2>
+    <canvas
+      id="favicon16"
+      width="16"
+      height="16"
+      style="border: 1px solid #ccc"
+    ></canvas>
+
+    <h2>180x180 Apple Touch Icon</h2>
+    <canvas
+      id="appleIcon"
+      width="180"
+      height="180"
+      style="border: 1px solid #ccc"
+    ></canvas>
+
+    <script>
+      function drawLogo(canvas, size) {
+        const ctx = canvas.getContext("2d");
+
+        // Create gradient
+        const gradient = ctx.createLinearGradient(0, 0, size, size);
+        gradient.addColorStop(0, "#10b981");
+        gradient.addColorStop(1, "#059669");
+
+        // Draw background
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, size, size);
+
+        // Draw N
+        ctx.fillStyle = "white";
+        ctx.font = `bold ${size * 0.6}px Inter, sans-serif`;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText("N", size / 2, size / 2);
+      }
+
+      // Generate all favicons
+      drawLogo(document.getElementById("favicon32"), 32);
+      drawLogo(document.getElementById("favicon16"), 16);
+      drawLogo(document.getElementById("appleIcon"), 180);
+    </script>
+  </body>
+</html>

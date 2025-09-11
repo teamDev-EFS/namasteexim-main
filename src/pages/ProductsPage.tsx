@@ -1,14 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  Search,
-  Filter,
-  Grid,
-  List,
-  ArrowRight,
-  Package,
-  Star,
-} from "lucide-react";
+import { Search, Grid, List, ArrowRight, Package } from "lucide-react";
 import {
   productCategories,
   searchProducts,
@@ -23,6 +15,13 @@ const ProductsPage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categoryId || ""
   );
+
+  // Update selected category when categoryId changes
+  useEffect(() => {
+    if (categoryId) {
+      setSelectedCategory(categoryId);
+    }
+  }, [categoryId]);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
   const [expandedCategories, setExpandedCategories] = useState<Set<string>>(
     new Set()
@@ -36,12 +35,15 @@ const ProductsPage: React.FC = () => {
       products = searchProducts(searchQuery);
     } else if (selectedCategory) {
       products = getProductsByCategory(selectedCategory);
+    } else if (categoryId) {
+      // Handle direct category navigation from URL
+      products = getProductsByCategory(categoryId);
     } else {
       products = productCategories.flatMap((cat) => cat.products);
     }
 
     return products;
-  }, [searchQuery, selectedCategory]);
+  }, [searchQuery, selectedCategory, categoryId]);
 
   // Group products by category for search results
   const groupedProducts = useMemo(() => {

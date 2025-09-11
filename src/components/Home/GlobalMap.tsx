@@ -1,5 +1,5 @@
 import React from "react";
-import { MapPin, Globe, Building, Users, TrendingUp } from "lucide-react";
+import { Globe, Building, Users, TrendingUp } from "lucide-react";
 import WorkingMap from "../UI/WorkingMap";
 
 const GlobalMap: React.FC = () => {
@@ -14,7 +14,7 @@ const GlobalMap: React.FC = () => {
       details: {
         address: "Dubai, United Arab Emirates",
         phone: "+971 4 XXX XXXX",
-        email: "uae@namasteexim.com",
+        email: "uae@namasteeximventures.com",
         products: ["Basmati Rice", "Jaggery", "Spices", "Premium Nuts"],
         volume: "15,000+ MT annually",
       },
@@ -28,7 +28,7 @@ const GlobalMap: React.FC = () => {
       details: {
         address: "Riyadh, Saudi Arabia",
         phone: "+966 11 XXX XXXX",
-        email: "saudi@namasteexim.com",
+        email: "saudi@namasteeximventures.com",
         products: ["Basmati Rice", "Cardamom", "Black Pepper", "Cashews"],
         volume: "12,000+ MT annually",
       },
@@ -42,7 +42,7 @@ const GlobalMap: React.FC = () => {
       details: {
         address: "Doha, Qatar",
         phone: "+974 4 XXX XXXX",
-        email: "qatar@namasteexim.com",
+        email: "qatar@namasteeximventures.com",
         products: ["Premium Rice", "Organic Spices", "Luxury Nuts"],
         volume: "8,000+ MT annually",
       },
@@ -56,7 +56,7 @@ const GlobalMap: React.FC = () => {
       details: {
         address: "Kuwait City, Kuwait",
         phone: "+965 2 XXX XXXX",
-        email: "kuwait@namasteexim.com",
+        email: "kuwait@namasteeximventures.com",
         products: ["Traditional Rice", "Jaggery", "Regional Spices"],
         volume: "6,000+ MT annually",
       },

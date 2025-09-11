@@ -37,6 +37,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Ensure proper scroll restoration */
+html,
+body {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px; /* Account for fixed header */
+}
+
+/* Prevent scroll position from being maintained between routes */
+body {
+  scroll-restore: manual;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

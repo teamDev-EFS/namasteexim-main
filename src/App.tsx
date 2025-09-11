@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
+import ScrollToTop from "./components/Layout/ScrollToTop";
+import ScrollToTopButton from "./components/Layout/ScrollToTopButton";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ProductsPage from "./pages/ProductsPage";
@@ -10,11 +12,13 @@ import GlobalMarketsPage from "./pages/GlobalMarketsPage";
 import PartnershipsPage from "./pages/PartnershipsPage";
 import TeamPage from "./pages/TeamPage";
 import ContactPage from "./pages/ContactPage";
+import QuoteRequestPage from "./pages/QuoteRequestPage";
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <Header />
         <main>
           <Routes>
@@ -30,9 +34,11 @@ function App() {
             <Route path="/partnerships" element={<PartnershipsPage />} />
             <Route path="/team" element={<TeamPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/quote" element={<QuoteRequestPage />} />
           </Routes>
         </main>
         <Footer />
+        <ScrollToTopButton />
       </div>
     </Router>
   );

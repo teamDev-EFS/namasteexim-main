@@ -226,7 +226,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             View Details
           </Link>
           <Link
-            to="/contact"
+            to="/quote"
             className="flex-1 border-2 border-emerald-600 text-emerald-600 py-3 px-4 rounded-xl hover:bg-emerald-50 hover:border-emerald-700 transition-all duration-200 text-sm font-medium text-center shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           >
             Get Quote

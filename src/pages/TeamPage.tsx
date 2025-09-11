@@ -7,6 +7,8 @@ import {
   Users,
   Globe,
   TrendingUp,
+  Instagram,
+  Youtube,
 } from "lucide-react";
 
 const TeamPage: React.FC = () => {
@@ -22,8 +24,13 @@ const TeamPage: React.FC = () => {
         "Quality Management",
       ],
       contact: {
-        email: "deepali@namasteexim.com",
-        phone: "+91 98765 43210",
+        email: "deepali@namasteeximventures.com",
+        phone: "+91-7806070556",
+        linkedin:
+          "https://www.linkedin.com/in/namaste-exim-ventures-1b1667377/",
+        instagram:
+          "https://www.instagram.com/namaste_exim_ventures?igsh=dm9hanFhMmhsNWR1",
+        youtube: "https://www.youtube.com/@NamasteEximVentures",
       },
     },
     {
@@ -33,8 +40,13 @@ const TeamPage: React.FC = () => {
       bio: "Specialist in supply chain optimization and business development. Dr. Ankit oversees operations and ensures seamless delivery across global markets while maintaining the highest quality standards.",
       expertise: ["Supply Chain", "Business Development", "Operations"],
       contact: {
-        email: "ankit@namasteexim.com",
-        phone: "+91 98765 43211",
+        email: "ankit@namasteeximventures.com",
+        phone: "+91-7806070556",
+        linkedin:
+          "https://www.linkedin.com/in/namaste-exim-ventures-1b1667377/",
+        instagram:
+          "https://www.instagram.com/namaste_exim_ventures?igsh=dm9hanFhMmhsNWR1",
+        youtube: "https://www.youtube.com/@NamasteEximVentures",
       },
     },
     {
@@ -44,8 +56,13 @@ const TeamPage: React.FC = () => {
       bio: "Expert in customer relations and market expansion. Ananya leads our customer success initiatives and drives partnerships that create lasting value for our global clients and partners.",
       expertise: ["Customer Relations", "Market Expansion", "Partnerships"],
       contact: {
-        email: "ananya@namasteexim.com",
-        phone: "+91 98765 43212",
+        email: "ananya@namasteeximventures.com",
+        phone: "+91-7806070556",
+        linkedin:
+          "https://www.linkedin.com/in/namaste-exim-ventures-1b1667377/",
+        instagram:
+          "https://www.instagram.com/namaste_exim_ventures?igsh=dm9hanFhMmhsNWR1",
+        youtube: "https://www.youtube.com/@NamasteEximVentures",
       },
     },
   ];
@@ -188,10 +205,14 @@ const TeamPage: React.FC = () => {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <a
-                          href={`mailto:${leader.contact.email}`}
-                          className="text-emerald-600 hover:text-emerald-700 transition-colors"
+                          href={`mailto:${leader.contact.email}?subject=Business Inquiry - ${leader.name}&body=Dear ${leader.name},%0D%0A%0D%0AI hope this email finds you well. I am reaching out regarding a potential business opportunity with Namaste EXIM Ventures.%0D%0A%0D%0A[Please provide details about your inquiry, requirements, or partnership interest]%0D%0A%0D%0AThank you for your time and consideration.%0D%0A%0D%0ABest regards,%0D%0A[Your Name]%0D%0A[Your Company]%0D%0A[Your Contact Information]`}
+                          className="text-emerald-600 hover:text-emerald-700 transition-colors group relative"
+                          title="Send email to this team member"
                         >
                           <Mail className="w-5 h-5" />
+                          <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-gray-900 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap">
+                            Email {leader.name}
+                          </div>
                         </a>
                         <a
                           href={`tel:${leader.contact.phone}`}
@@ -200,12 +221,32 @@ const TeamPage: React.FC = () => {
                           <Phone className="w-5 h-5" />
                         </a>
                       </div>
-                      <a
-                        href="#"
-                        className="text-gray-400 hover:text-emerald-600 transition-colors"
-                      >
-                        <Linkedin className="w-5 h-5" />
-                      </a>
+                      <div className="flex items-center space-x-3">
+                        <a
+                          href={leader.contact.linkedin}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-blue-600 transition-colors"
+                        >
+                          <Linkedin className="w-5 h-5" />
+                        </a>
+                        <a
+                          href={leader.contact.instagram}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-pink-600 transition-colors"
+                        >
+                          <Instagram className="w-5 h-5" />
+                        </a>
+                        <a
+                          href={leader.contact.youtube}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-gray-400 hover:text-red-600 transition-colors"
+                        >
+                          <Youtube className="w-5 h-5" />
+                        </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -309,7 +350,7 @@ const TeamPage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="mailto:careers@namasteexim.com"
+              href="mailto:careers@namasteeximventures.com"
               className="bg-white text-emerald-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
             >
               Send Your Resume

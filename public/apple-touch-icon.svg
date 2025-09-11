@@ -1,0 +1,15 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="90" cy="90" r="85" fill="url(#gradient1)" stroke="url(#gradient2)" stroke-width="3"/>
+  <path d="M45 45 L45 135 L55 135 L55 75 L95 135 L105 135 L105 45 L95 45 L95 105 L55 45 L45 45 Z" fill="white" stroke="white" stroke-width="1"/>
+  <path d="M115 45 L115 135 L125 135 L125 75 L145 75 L145 45 L115 45 Z M125 85 L125 95 L155 95 L155 85 L125 85 Z M125 105 L125 115 L155 115 L155 105 L125 105 Z" fill="white" stroke="white" stroke-width="1"/>
+  <defs>
+    <linearGradient id="gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#047857;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10B981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

@@ -46,6 +46,9 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Trust proxy for Render deployment (handles X-Forwarded-For headers)
+app.set("trust proxy", 1);
+
 // Connect to MongoDB
 connectDB();
 
@@ -97,6 +100,8 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // limit each IP to 100 requests per windowMs
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   message: {
     error: "Too many requests from this IP, please try again later.",
   },
@@ -203,7 +208,8 @@ app.get("/api/health", (req, res) => {
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV || "development",
     version: "1.0.0",
-    database: mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
+    database:
+      mongoose.connection.readyState === 1 ? "Connected" : "Disconnected",
   });
 });
 
@@ -262,15 +268,19 @@ app.post("/api/contact", async (req, res) => {
 
     // Check if emails were sent successfully
     if (!adminEmailSent || !userEmailSent) {
-      console.warn("⚠️ Some emails failed to send, but contact form was saved to database");
+      console.warn(
+        "⚠️ Some emails failed to send, but contact form was saved to database"
+      );
       res.status(200).json({
         success: true,
-        message: "Contact form submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
+        message:
+          "Contact form submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
       });
     } else {
       res.status(200).json({
         success: true,
-        message: "Contact form submitted successfully. We will get back to you within 24 hours.",
+        message:
+          "Contact form submitted successfully. We will get back to you within 24 hours.",
       });
     }
   } catch (error) {
@@ -285,7 +295,8 @@ app.post("/api/contact", async (req, res) => {
 // Quote Request Endpoint
 app.post("/api/quote", async (req, res) => {
   try {
-    const { name, email, phone, company, product, quantity, requirements } = req.body;
+    const { name, email, phone, company, product, quantity, requirements } =
+      req.body;
 
     // Validate required fields
     const validationErrors = validateInput(req.body, [
@@ -326,7 +337,9 @@ app.post("/api/quote", async (req, res) => {
     const adminEmailSent = await sendEmail(
       process.env.ADMIN_EMAIL,
       `New Quote Request: ${product}`,
-      `New quote request from ${name} (${email}) for ${product}. Quantity: ${quantity}. Requirements: ${requirements || 'None specified'}`
+      `New quote request from ${name} (${email}) for ${product}. Quantity: ${quantity}. Requirements: ${
+        requirements || "None specified"
+      }`
     );
 
     // Send confirmation email to user
@@ -338,15 +351,19 @@ app.post("/api/quote", async (req, res) => {
 
     // Check if emails were sent successfully
     if (!adminEmailSent || !userEmailSent) {
-      console.warn("⚠️ Some emails failed to send, but quote request was saved to database");
+      console.warn(
+        "⚠️ Some emails failed to send, but quote request was saved to database"
+      );
       res.status(200).json({
         success: true,
-        message: "Quote request submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
+        message:
+          "Quote request submitted successfully. We will get back to you within 24 hours. (Note: Email notifications may be delayed)",
       });
     } else {
       res.status(200).json({
         success: true,
-        message: "Quote request submitted successfully. We will get back to you within 24 hours.",
+        message:
+          "Quote request submitted successfully. We will get back to you within 24 hours.",
       });
     }
   } catch (error) {

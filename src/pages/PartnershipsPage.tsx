@@ -384,7 +384,7 @@ const PartnershipsPage: React.FC = () => {
               <ArrowRight className="w-5 h-5" />
             </Link>
             <a
-              href="mailto:partnerships@namasteexim.com"
+              href="mailto:namasteeximventures@gmail.com?subject=Partnership Inquiry - Namaste EXIM Ventures&body=Dear Namaste EXIM Ventures Team,%0D%0A%0D%0AI hope this email finds you well. I am interested in exploring partnership opportunities with your company.%0D%0A%0D%0ACompany Information:%0D%0A- Company Name: [Your Company Name]%0D%0A- Industry: [Your Industry]%0D%0A- Location: [Your Location]%0D%0A- Website: [Your Website]%0D%0A%0D%0APartnership Interest:%0D%0A- Type of Partnership: [Distributor/Supplier/Agent/Other]%0D%0A- Products of Interest: [Specific products you're interested in]%0D%0A- Target Markets: [Your target markets]%0D%0A- Expected Volume: [Monthly/Annual volume requirements]%0D%0A%0D%0AAdditional Information:%0D%0A[Please provide any additional details about your business, experience, or specific requirements]%0D%0A%0D%0AThank you for your time and consideration. I look forward to hearing from you soon.%0D%0A%0D%0ABest regards,%0D%0A[Your Name]%0D%0A[Your Title]%0D%0A[Your Company]%0D%0A[Your Contact Information]"
               className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-emerald-600 transition-all duration-300 flex items-center justify-center space-x-2"
             >
               <span>Send Email</span>

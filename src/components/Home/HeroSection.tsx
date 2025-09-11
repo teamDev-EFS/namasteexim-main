@@ -1,13 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  ArrowRight,
-  Play,
-  Globe,
-  Award,
-  Users,
-  TrendingUp,
-} from "lucide-react";
+import { ArrowRight, Globe, Award, Users, TrendingUp } from "lucide-react";
 import ExportImportImage from "../../assets/images/Export-Import.jpg";
 
 const HeroSection: React.FC = () => {
@@ -139,20 +132,6 @@ const HeroSection: React.FC = () => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Scroll indicator */}
-        <div
-          className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 transition-all duration-1000 delay-1000 ${
-            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-          }`}
-        >
-          <div className="w-8 h-12 border-3 border-white/60 rounded-full flex justify-center backdrop-blur-sm bg-white/10">
-            <div className="w-2 h-4 bg-white rounded-full mt-2 animate-bounce"></div>
-          </div>
-          <p className="text-white/80 text-sm mt-3 font-medium">
-            Scroll to explore
-          </p>
         </div>
       </div>
 

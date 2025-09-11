@@ -52,11 +52,11 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-4 text-xs text-gray-600">
               <div className="flex items-center space-x-1">
                 <Phone className="w-3 h-3" />
-                <span>+91 98765 43210</span>
+                <span>+91-7806070556</span>
               </div>
               <div className="flex items-center space-x-1">
                 <Mail className="w-3 h-3" />
-                <span>info@namasteexim.com</span>
+                <span>info@namasteeximventures.com</span>
               </div>
             </div>
             <div className="flex items-center space-x-3 text-xs text-gray-600">
@@ -74,15 +74,29 @@ const Header: React.FC = () => {
           {/* Main Navigation Row */}
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center">
-                <span className="text-white text-lg font-bold">N</span>
-              </div>
-              <div className="hidden sm:block">
-                <h1 className="text-lg font-bold text-gray-900">
-                  Namaste EXIM
-                </h1>
-                <p className="text-xs text-gray-600">Ventures</p>
+            <Link to="/" className="flex items-center space-x-3 group">
+              <div className="relative">
+                <img
+                  src="/images/namaste-exim-new-logo.jpeg"
+                  alt="Namaste EXIM Ventures Logo"
+                  className="h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105 filter drop-shadow-lg"
+                  onError={(e) => {
+                    // Fallback to premium SVG if image fails to load
+                    e.currentTarget.style.display = "none";
+                    const nextElement = e.currentTarget
+                      .nextElementSibling as HTMLElement;
+                    if (nextElement) {
+                      nextElement.style.display = "block";
+                    }
+                  }}
+                />
+                <div className="hidden h-14 w-auto">
+                  <img
+                    src="/namaste-exim-logo-premium.svg"
+                    alt="Namaste EXIM Ventures Premium Logo"
+                    className="h-full w-auto filter drop-shadow-lg"
+                  />
+                </div>
               </div>
             </Link>
 
@@ -161,7 +175,7 @@ const Header: React.FC = () => {
             {/* CTA Button */}
             <div className="hidden lg:block">
               <Link
-                to="/contact"
+                to="/quote"
                 className="bg-gradient-to-r from-emerald-600 to-emerald-700 text-white px-6 py-3 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-800 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
               >
                 Get Quote
@@ -196,6 +210,7 @@ const Header: React.FC = () => {
               <Link
                 to="/products"
                 className="block text-gray-700 hover:text-emerald-600 font-medium py-2"
+                onClick={() => setIsMenuOpen(false)}
               >
                 Products
               </Link>
@@ -237,7 +252,7 @@ const Header: React.FC = () => {
 
               <div className="pt-4 border-t border-gray-200">
                 <Link
-                  to="/contact"
+                  to="/quote"
                   className="block w-full bg-gradient-to-r from-emerald-600 to-emerald-700 text-white text-center py-3 px-6 rounded-xl font-semibold hover:from-emerald-700 hover:to-emerald-800 transition-colors"
                 >
                   Get Quote
