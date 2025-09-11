@@ -157,17 +157,17 @@ const TeamPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {leadership.map((leader, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group flex flex-col"
               >
                 <div className="relative overflow-hidden">
                   <img
                     src={leader.image}
                     alt={leader.name}
-                    className="w-full h-80 object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-72 lg:h-80 object-cover object-top group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                   <div className="absolute bottom-6 left-6 right-6">
@@ -180,8 +180,8 @@ const TeamPage: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <p className="text-gray-600 mb-4 leading-relaxed">
+                <div className="p-6 flex flex-col flex-grow">
+                  <p className="text-gray-600 mb-4 leading-relaxed flex-grow">
                     {leader.bio}
                   </p>
 
@@ -201,7 +201,7 @@ const TeamPage: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="border-t border-gray-200 pt-4">
+                  <div className="border-t border-gray-200 pt-4 mt-auto">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <a
@@ -269,11 +269,11 @@ const TeamPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {departments.map((dept, index) => (
               <div
                 key={index}
-                className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 group"
+                className="text-center p-6 rounded-2xl bg-gray-50 hover:bg-white hover:shadow-xl transition-all duration-300 group flex flex-col"
               >
                 <div
                   className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}
@@ -283,10 +283,10 @@ const TeamPage: React.FC = () => {
                 <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {dept.name}
                 </h3>
-                <p className="text-gray-600 mb-3 leading-relaxed">
+                <p className="text-gray-600 mb-3 leading-relaxed flex-grow">
                   {dept.description}
                 </p>
-                <div className="text-sm font-semibold text-emerald-600">
+                <div className="text-sm font-semibold text-emerald-600 mt-auto">
                   {dept.teamSize}
                 </div>
               </div>
