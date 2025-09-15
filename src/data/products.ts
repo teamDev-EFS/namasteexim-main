@@ -1,4 +1,4 @@
-import { resolveProductImage } from "../utils/assetResolver";
+// Product data definitions
 
 export interface ProductVariant {
   type: string;
@@ -45,6 +45,19 @@ export const productCategories: ProductCategory[] = [
     description:
       "Premium rice varieties from India's finest agricultural regions",
     subCategories: {
+      "Basmati Rice Varieties": [
+        "1121 Basmati Rice (Steam / Sella / Raw)",
+        "1509 Basmati Rice (Steam / Sella / Raw)",
+        "1401 Basmati Rice (Steam / Sella / Raw)",
+        "Traditional Basmati Rice (Aged, Premium Quality)",
+        "Pusa Basmati Rice (Steam / Sella / Raw)",
+      ],
+      "Non-Basmati Rice Varieties": [
+        "Parboiled Rice (IR 64, 100% Broken / 5% Broken)",
+        "Chinnor Rice – Premium Short Grain",
+        "Sona Masoori Rice",
+        "Kolam Rice",
+      ],
       "Perfumed Rice": [
         "ST24/ST25 Rice (World Best Rice 2019)",
         "Jasmine Rice ST20 (Same as Basmati Rice)",
@@ -59,14 +72,218 @@ export const productCategories: ProductCategory[] = [
         "Parboiled Rice 5% Broken",
       ],
       "Glutinous Rice": ["Long An Glutinous Rice", "An Giang Glutinous Rice"],
-      "Non-Basmati Rice Varieties": [
-        "Parmal Golden Sella - High yield, consistent quality, parboiled",
-        "Short-Grain Options (Sushi, Sticky Rice Dishes)",
-        "Medium-Grain Options (Asian & European Cuisines)",
-        "Specialty Varieties (Unique Market Demands)",
-      ],
     },
     products: [
+      // Basmati Rice Varieties
+      {
+        id: "basmati-1121",
+        name: "1121 Basmati Rice",
+        category: "Rice Portfolio",
+        subCategory: "Basmati Rice Varieties",
+        description:
+          "Extra long grain premium basmati rice with exceptional aroma, available in Steam, Sella, and Raw varieties",
+        image: "1121 Basmati Rice",
+        variants: [
+          {
+            type: "Steam",
+            description: "Steamed for enhanced texture and cooking properties",
+          },
+          {
+            type: "Sella",
+            description: "Parboiled golden variety with nutty flavor",
+          },
+          { type: "Raw", description: "Natural unprocessed premium quality" },
+        ],
+        keyFeatures: [
+          "Extra Long Grain (8.5mm+)",
+          "Exceptional Aroma & Flavor",
+          "Premium Export Quality",
+          "Perfect for Biryanis & Pulao",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "basmati-1509",
+        name: "1509 Basmati Rice",
+        category: "Rice Portfolio",
+        subCategory: "Basmati Rice Varieties",
+        description:
+          "High-yielding basmati variety with excellent cooking properties, available in Steam, Sella, and Raw varieties",
+        image: "1509 Basmati Rice",
+        variants: [
+          {
+            type: "Steam",
+            description: "Steamed for enhanced texture and cooking properties",
+          },
+          {
+            type: "Sella",
+            description: "Parboiled golden variety with nutty flavor",
+          },
+          { type: "Raw", description: "Natural unprocessed premium quality" },
+        ],
+        keyFeatures: [
+          "High Yield Variety",
+          "Long Grain Structure",
+          "Excellent Cooking Properties",
+          "Consistent Quality",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "basmati-1401",
+        name: "1401 Basmati Rice",
+        category: "Rice Portfolio",
+        subCategory: "Basmati Rice Varieties",
+        description:
+          "Premium basmati variety with superior aroma and cooking characteristics, available in Steam, Sella, and Raw varieties",
+        image: "1401 Basmati Rice",
+        variants: [
+          {
+            type: "Steam",
+            description: "Steamed for enhanced texture and cooking properties",
+          },
+          {
+            type: "Sella",
+            description: "Parboiled golden variety with nutty flavor",
+          },
+          { type: "Raw", description: "Natural unprocessed premium quality" },
+        ],
+        keyFeatures: [
+          "Superior Aroma",
+          "Long Grain Structure",
+          "Premium Quality",
+          "Excellent Cooking Properties",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "traditional-basmati",
+        name: "Traditional Basmati Rice",
+        category: "Rice Portfolio",
+        subCategory: "Basmati Rice Varieties",
+        description:
+          "Aged, premium quality traditional basmati rice with authentic aroma and superior cooking properties",
+        image: "Traditional Basmati Rice Premium",
+        keyFeatures: [
+          "Aged for Enhanced Aroma",
+          "Traditional Quality",
+          "Premium Export Grade",
+          "Authentic Basmati Characteristics",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "pusa-basmati",
+        name: "Pusa Basmati Rice",
+        category: "Rice Portfolio",
+        subCategory: "Basmati Rice Varieties",
+        description:
+          "High-yielding Pusa basmati variety with excellent grain quality, available in Steam, Sella, and Raw varieties",
+        image: "Pusa Basmati Rice",
+        variants: [
+          {
+            type: "Steam",
+            description: "Steamed for enhanced texture and cooking properties",
+          },
+          {
+            type: "Sella",
+            description: "Parboiled golden variety with nutty flavor",
+          },
+          { type: "Raw", description: "Natural unprocessed premium quality" },
+        ],
+        keyFeatures: [
+          "High Yield Variety",
+          "Long Grain Structure",
+          "Excellent Cooking Properties",
+          "Consistent Quality",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      // Non-Basmati Rice Varieties
+      {
+        id: "parboiled-rice-ir64",
+        name: "Parboiled Rice IR 64",
+        category: "Rice Portfolio",
+        subCategory: "Non-Basmati Rice Varieties",
+        description:
+          "High-quality parboiled rice available in 100% Broken and 5% Broken varieties",
+        image: "Parboiled Rice",
+        variants: [
+          {
+            type: "100% Broken",
+            description: "Fully broken grains for specific applications",
+          },
+          {
+            type: "5% Broken",
+            description: "Premium grade with minimal broken grains",
+          },
+        ],
+        keyFeatures: [
+          "Parboiled Processing",
+          "High Nutritional Value",
+          "Excellent Cooking Properties",
+          "Consistent Quality",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "chinnor-rice",
+        name: "Chinnor Rice – Premium Short Grain",
+        category: "Rice Portfolio",
+        subCategory: "Non-Basmati Rice Varieties",
+        description:
+          "Premium short grain rice with excellent cooking properties and mild aroma",
+        image: "Chinnor Rice - Premium Short Grain",
+        keyFeatures: [
+          "Premium Short Grain",
+          "Mild Aroma",
+          "Excellent Cooking Properties",
+          "Consistent Quality",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "sona-masoori",
+        name: "Sona Masoori Rice",
+        category: "Rice Portfolio",
+        subCategory: "Non-Basmati Rice Varieties",
+        description:
+          "Popular medium grain rice variety known for its excellent cooking properties and mild flavor",
+        image: "Sona Masoori Rice",
+        keyFeatures: [
+          "Medium Grain Structure",
+          "Mild Flavor",
+          "Excellent Cooking Properties",
+          "Popular Choice",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      {
+        id: "kolam-rice",
+        name: "Kolam Rice",
+        category: "Rice Portfolio",
+        subCategory: "Non-Basmati Rice Varieties",
+        description:
+          "Premium short grain rice variety with excellent texture and cooking properties",
+        image: "Kolam Rice",
+        keyFeatures: [
+          "Short Grain Variety",
+          "Excellent Texture",
+          "Good Cooking Properties",
+          "Consistent Quality",
+        ],
+        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
+        shelfLife: "24 months",
+      },
+      // Perfumed Rice
       {
         id: "st24-st25-rice",
         name: "ST24/ST25 Rice (World Best Rice 2019)",
@@ -101,40 +318,6 @@ export const productCategories: ProductCategory[] = [
         shelfLife: "24 months",
       },
       {
-        id: "basmati-1121",
-        name: "Basmati Rice 1121",
-        category: "Rice Portfolio",
-        subCategory: "Perfumed Rice",
-        description:
-          "Extra long grain premium basmati rice with exceptional aroma",
-        image: "basmati-1121",
-        keyFeatures: [
-          "Extra Long Grain",
-          "Exceptional Aroma",
-          "Premium Export Quality",
-          "Perfect for Biryanis",
-        ],
-        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
-        shelfLife: "24 months",
-      },
-      {
-        id: "white-rice",
-        name: "Premium White Rice",
-        category: "Rice Portfolio",
-        subCategory: "White Rice",
-        description:
-          "High-quality long grain white rice with excellent cooking properties",
-        image: "white-rice",
-        keyFeatures: [
-          "Long Grain Structure",
-          "Excellent Cooking Properties",
-          "Versatile for All Cuisines",
-          "Consistent Quality",
-        ],
-        packaging: ["25kg bags", "50kg bags", "Bulk containers"],
-        shelfLife: "24 months",
-      },
-      {
         id: "thai-rice",
         name: "Thai Jasmine Rice",
         category: "Rice Portfolio",
@@ -150,18 +333,20 @@ export const productCategories: ProductCategory[] = [
         packaging: ["25kg bags", "50kg bags", "Bulk containers"],
         shelfLife: "24 months",
       },
+      // White Rice
       {
-        id: "parmal-golden-sella",
-        name: "Parmal Golden Sella",
+        id: "white-rice",
+        name: "Premium White Rice",
         category: "Rice Portfolio",
-        subCategory: "Non-Basmati Rice Varieties",
-        description: "High yield, consistent quality, parboiled rice variety",
-        image: "rice",
+        subCategory: "White Rice",
+        description:
+          "High-quality long grain white rice with excellent cooking properties",
+        image: "white-rice",
         keyFeatures: [
-          "High Yield Variety",
-          "Consistent Quality",
-          "Parboiled Processing",
+          "Long Grain Structure",
           "Excellent Cooking Properties",
+          "Versatile for All Cuisines",
+          "Consistent Quality",
         ],
         packaging: ["25kg bags", "50kg bags", "Bulk containers"],
         shelfLife: "24 months",
@@ -408,32 +593,69 @@ export const productCategories: ProductCategory[] = [
         shelfLife: "24 months",
       },
       {
-        id: "eggs",
-        name: "Fresh Eggs",
+        id: "white-eggs",
+        name: "White Eggs",
         category: "Specialty Products",
         description:
-          "Sourced from certified poultry farms, rich in protein and nutrients, suitable for households, food services, and health markets",
-        image: "eggs",
-        variants: [
-          {
-            type: "White Eggs",
-            description: "Clean, uniform shells with mild flavor",
-          },
-          {
-            type: "Brown Eggs",
-            description: "Slightly richer taste, preferred in organic markets",
-          },
-          {
-            type: "Quail Eggs",
-            description: "Small, nutrient-dense, exotic appeal",
-          },
-        ],
+          "Premium white eggs sourced from certified poultry farms, rich in protein and nutrients",
+        image: "White Eggs",
         keyFeatures: [
+          "Clean, Uniform Shells",
+          "Mild, Pleasant Flavor",
           "High in Protein, Vitamin D, B12 & Selenium",
-          "Low in Calories & Carbs",
           "Sourced from Antibiotic-Free & Hormone-Free Farms",
           "Available in Graded Sizes (S, M, L, XL)",
-          "Washed, UV-Sanitized & Packed for Extended Shelf Life",
+        ],
+        packaging: ["30-egg trays", "60-egg trays", "Bulk packaging"],
+        shelfLife: "28 days (refrigerated)",
+      },
+      {
+        id: "brown-eggs",
+        name: "Brown Eggs",
+        category: "Specialty Products",
+        description:
+          "Premium brown eggs with slightly richer taste, preferred in organic and health markets",
+        image: "Brown Eggs",
+        keyFeatures: [
+          "Richer Taste Profile",
+          "Preferred in Organic Markets",
+          "High in Protein, Vitamin D, B12 & Selenium",
+          "Sourced from Antibiotic-Free & Hormone-Free Farms",
+          "Available in Graded Sizes (S, M, L, XL)",
+        ],
+        packaging: ["30-egg trays", "60-egg trays", "Bulk packaging"],
+        shelfLife: "28 days (refrigerated)",
+      },
+      {
+        id: "black-meat-chicken-eggs",
+        name: "Black Meat Chicken Eggs",
+        category: "Specialty Products",
+        description:
+          "Premium eggs from black meat chicken breeds, known for superior nutritional value and rich flavor",
+        image: "Black Meat Chicken Eggs",
+        keyFeatures: [
+          "Superior Nutritional Value",
+          "Rich, Distinctive Flavor",
+          "Higher Protein Content",
+          "Sourced from Premium Black Meat Chicken Breeds",
+          "Available in Graded Sizes (S, M, L, XL)",
+        ],
+        packaging: ["30-egg trays", "60-egg trays", "Bulk packaging"],
+        shelfLife: "28 days (refrigerated)",
+      },
+      {
+        id: "quail-eggs",
+        name: "Quail Eggs",
+        category: "Specialty Products",
+        description:
+          "Small, nutrient-dense quail eggs with exotic appeal and superior nutritional profile",
+        image: "Quail Eggs",
+        keyFeatures: [
+          "Nutrient-Dense",
+          "Exotic Appeal",
+          "Higher Protein per Gram",
+          "Rich in Vitamins & Minerals",
+          "Perfect for Gourmet Applications",
         ],
         packaging: ["30-egg trays", "60-egg trays", "Bulk packaging"],
         shelfLife: "28 days (refrigerated)",

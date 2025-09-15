@@ -44,7 +44,8 @@ const ContactPage: React.FC = () => {
       description: "Our headquarters and main export facility",
       type: "office" as const,
       details: {
-        address: "Export Plaza, Mumbai, Maharashtra 400001, India",
+        address:
+          "133 Shree Vinayak Township Devguradiya Bicholi Mardana Indore 452016",
         phone: "+91-7806070556",
         email: "info@namasteeximventures.com",
         products: ["Rice", "Jaggery", "Spices", "Nuts"],
@@ -54,11 +55,12 @@ const ContactPage: React.FC = () => {
     {
       id: "warehouse-mumbai",
       position: { lat: 19.076090158701667, lng: 72.87511931490205 },
-      title: "Mumbai Warehouse",
+      title: "Indore Warehouse",
       description: "Primary storage and packaging facility",
       type: "warehouse" as const,
       details: {
-        address: "Mumbai Port Area, Maharashtra, India",
+        address:
+          "133 Shree Vinayak Township Devguradiya Bicholi Mardana Indore 452016",
         phone: "+91-7806070556",
         email: "namasteeximventures@gmail.com",
         products: ["Bulk Storage", "Quality Control", "Packaging"],
