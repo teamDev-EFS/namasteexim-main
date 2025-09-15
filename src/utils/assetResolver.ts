@@ -34,6 +34,22 @@ const directImageMappings: Record<string, string> = {
   "fragrance-candles": "fragrance-candles.jpg",
   "chia seeds": "chia seeds.webp",
   "scented candles": "scented candles.webp",
+  // New Rice Images
+  "1121 Basmati Rice": "1121 Basmati Rice.jpg",
+  "1509 Basmati Rice": "1509 Basmati Rice.jpg",
+  "1401 Basmati Rice": "1401 Basmati Rice.jpg",
+  "Traditional Basmati Rice Premium": "Traditional Basmati Rice Premium.jpg",
+  "Pusa Basmati Rice": "Pusa Basmati Rice.jpg",
+  "Parboiled Rice": "Parboiled Rice.jpg",
+  "Chinnor Rice - Premium Short Grain":
+    "Chinnor Rice - Premium Short Grain.jpg",
+  "Sona Masoori Rice": "Sona Masoori Rice.jpg",
+  "Kolam Rice": "Kolam Rice.jpg",
+  // New Egg Images
+  "White Eggs": "White Eggs.jpg",
+  "Brown Eggs": "Brown Eggs.jpg",
+  "Black Meat Chicken Eggs": "Black Meat Chicken Eggs.jpg",
+  "Quail Eggs": "Quail Eggs.jpg",
 };
 
 // Category-specific fallback images with better quality
