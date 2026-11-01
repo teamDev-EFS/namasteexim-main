@@ -35,7 +35,7 @@ const SimpleGoogleMap: React.FC<SimpleGoogleMapProps> = ({
 
   // Generate Google Maps iframe URL with proper format
   const generateMapUrl = () => {
-    const apiKey = "AIzaSyDmzcwUN7T2d9VDQNQfG1QOWHDl0JFtY-U";
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? "";
     const centerStr = `${center.lat},${center.lng}`;
     const zoomStr = zoom.toString();
 

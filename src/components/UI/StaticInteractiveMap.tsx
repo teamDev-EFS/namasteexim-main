@@ -39,7 +39,7 @@ const StaticInteractiveMap: React.FC<StaticInteractiveMapProps> = ({
 
   // Generate static map URL with better formatting
   const generateStaticMapUrl = () => {
-    const apiKey = "AIzaSyDmzcwUN7T2d9VDQNQfG1QOWHDl0JFtY-U";
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY ?? "";
     const baseUrl = "https://maps.googleapis.com/maps/api/staticmap";
     const size = "800x600";
     const centerStr = `${center.lat},${center.lng}`;
